@@ -2,24 +2,27 @@ package com.example.utilisateur.kottest
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 
 class MainActivity : Activity(), BleActionHandler {
 
+    //Exemple du fameux BleActionHandler du grand developeur maxime boinet.
+    private lateinit var bleHandler: BleHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bleH = BleHandler(this)
+        //Initialisation de notre ble handler, avec notre "action handler"
+        // qui doit être une activity implementant BleAction Handler
+        bleHandler = BleHandler(this)
+
+        //Pour parler à la device si besoin (envoyer la valeur voulu
+        bleHandler.sendData(4)
+
     }
 
+    //Le blehandler enverra ses valeurs à l'activity via cette fonction.
     override fun handleReceveidValue(actionValue: Short) {
-        Log.i("LETAG", "SUKA BLYAT $actionValue")
-    }
-
-    companion object {
-        val INDEX_DEVICE = "indexDevice"
-        private val REQUEST_ENABLE_BT = 5
+        TODO("associer les valeur recu aux action voulu")
     }
 }
